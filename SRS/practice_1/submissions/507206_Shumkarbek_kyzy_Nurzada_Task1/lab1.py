@@ -1,7 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
-# Ваши коэффициенты
 a = -0.68
 b = 3.91
 c = 7.85
@@ -47,7 +45,7 @@ def backward_euler(fun, x0, Tf, h, tol=1e-8, max_iter=100):
     x_hist[:, 0] = x0
     
     for k in range(len(t) - 1):
-        x_hist[:, k + 1] = x_hist[:, k]  # Initial guess
+        x_hist[:, k + 1] = x_hist[:, k] 
         
         for i in range(max_iter):
             x_next = x_hist[:, k] + h * fun(x_hist[:, k + 1])
@@ -77,25 +75,23 @@ def runge_kutta4(fun, x0, Tf, h):
     
     return x_hist, t
 
-# Параметры для ВАШЕГО уравнения
+
 x0 = np.array([0.0, 0.0])  # Начальные условия: x(0)=0, x'(0)=0
-Tf = 1.0  # Уменьшено из-за неустойчивости
+Tf = 1.0 
 h = 0.01
 
-# Решение всеми методами для ВАШЕГО уравнения
 x_fe, t_fe = forward_euler(your_equation, x0, Tf, h)
 x_be, t_be = backward_euler(your_equation, x0, Tf, h)
 x_rk4, t_rk4 = runge_kutta4(your_equation, x0, Tf, h)
 
-# ВАЖНО: СОЗДАТЬ FIGURE ПЕРЕД ГРАФИКАМИ!
 plt.figure(figsize=(24, 8))
 
-# Plot results - ПРАВИЛЬНЫЙ ПОРЯДОК!
+
 plt.subplot(1, 3, 1)
 plt.plot(t_fe, x_fe[0, :], label='Forward Euler')
 plt.plot(t_be, x_be[0, :], label='Backward Euler')
 plt.plot(t_rk4, x_rk4[0, :], label='RK4')
-plt.plot(t_fe, analytic_solution(t_fe), 'k--', label='Analytical', linewidth=3)  # Аналитическое решение ВНУТРИ subplot
+plt.plot(t_fe, analytic_solution(t_fe), 'k--', label='Analytical', linewidth=3)  
 plt.xlabel('Time')
 plt.ylabel('x(t)')
 plt.legend()
@@ -113,7 +109,6 @@ plt.legend()
 plt.title('Derivative dx/dt vs Time')
 plt.grid(True)
 
-# График 3: Phase Portrait - ДОБАВИТЬ АНАЛИТИЧЕСКИЙ ФАЗОВЫЙ ПОРТРЕТ
 plt.subplot(1, 3, 3)
 plt.plot(x_fe[0, :], x_fe[1, :], label='Forward Euler')
 plt.plot(x_be[0, :], x_be[1, :], label='Backward Euler')
